@@ -17,7 +17,8 @@ builder.Services.AddDbContext<StoreContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddScoped<IProductRepository, ProductRepository>();      //scoped to the lifetime of http request
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
 //Middleware - software that runs / can run on the request as its coming thru
 var app = builder.Build();
